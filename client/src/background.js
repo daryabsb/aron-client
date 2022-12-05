@@ -32,6 +32,7 @@ async function createWindow() {
   });
 
   win.webContents.on("context-menu", (e) => {
+    console.log(e);
     contextMenu.popup(win);
   });
 
