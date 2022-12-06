@@ -1,26 +1,41 @@
 import { defineStore } from "pinia";
+import { useStorage } from "@vueuse/core";
 import axios from "axios";
-axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
-axios.defaults.xsrfCookieName = "csrftoken";
 
 export const useUserStore = defineStore("user", {
   state: () => ({
-    user: null,
-    token: null,
+    user: useStorage("user", {}),
+    token: useStorage("token", ""),
+    signedIn: useStorage("signedIn", false),
   }),
 
-  actions: {
-    async fetchUser(token) {
-      console.log("TOKEN", `token${token.token}`);
-      const res = await axios.get("http://127.0.0.1:8000/api/user/me/", {
+  getters: {
+    useUser(state) {
+      return state.user;
+    },
+    isAuthenticated(state) {
+      return state.signedIn;
+    },
+    useAuthHeader(state) {
+      return {
         headers: {
-          Authorization: `Token ${token.token}`,
-          //   Authorization: token,
+          Authorization: `Token ${this.token}`,
         },
-      });
+      };
+    },
+  },
+
+  actions: {
+    async fetchUser() {
+      // localStorage.setItem("auth");
+      const res = await axios.get(
+        "http://127.0.0.1:8000/api/user/me/",
+        this.useAuthHeader
+      );
 
       const user = await res.data;
       this.user = user;
+      this.signedIn = true;
     },
     async signUp(email, password) {
       const res = await axios.post("http://127.0.0.1:8000/api/user/create/", {
@@ -33,17 +48,24 @@ export const useUserStore = defineStore("user", {
       const user = await res.json();
       this.user = user;
     },
-    async signIn(data) {
+    async signIn(email, password) {
+      console.log("from login page", email, password);
       try {
-        const res = await axios.post(
-          "http://127.0.0.1:8000/api/user/token/",
-          data
-        );
-        this.token = await res.data;
-        await this.fetchUser(this.token);
+        const res = await axios.post("http://127.0.0.1:8000/api/user/token/", {
+          email,
+          password,
+        });
+        this.token = await res.data.token;
+        localStorage.setItem("auth_token", res.data.token);
+        await this.fetchUser();
       } catch (error) {
         console.log(error);
       }
+    },
+    signOut() {
+      this.user = {};
+      this.token = "";
+      this.signedIn = false;
     },
   },
 });

@@ -17,8 +17,8 @@ const app = createApp(App);
  * @returns returns timeAgo
  */
 
+axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
-axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
 app.config.globalProperties.$filters = {
   timeAgo(date) {

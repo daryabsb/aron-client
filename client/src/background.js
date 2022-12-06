@@ -3,6 +3,7 @@
 import { app, protocol, BrowserWindow, Menu } from "electron";
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 import installExtension, { VUEJS3_DEVTOOLS } from "electron-devtools-installer";
+import windowStateKeeper from "electron-window-state";
 const isDevelopment = process.env.NODE_ENV !== "production";
 
 require("@electron/remote/main").initialize();
@@ -18,10 +19,18 @@ protocol.registerSchemesAsPrivileged([
 ]);
 
 async function createWindow() {
+  // Window state keeper
+  let state = windowStateKeeper({
+    defaultWidth: 1530,
+    defaultHeight: 920,
+  });
+
   // Create the browser window.
   const win = new BrowserWindow({
-    width: 1280,
-    height: 720,
+    x: state.x,
+    y: state.y,
+    width: state.width,
+    height: state.height,
     webPreferences: {
       // Use pluginOptions.nodeIntegration, leave this alone
       // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
@@ -31,10 +40,28 @@ async function createWindow() {
     },
   });
 
+  win.maximize();
+
   win.webContents.on("context-menu", (e) => {
     console.log(e);
     contextMenu.popup(win);
   });
+
+  // MINIMIZE ON CLOSE OR MINIMIZE
+
+  // win.on("minimize", function (event) {
+  //   event.preventDefault();
+  //   win.hide();
+  // });
+
+  // win.on("close", function (event) {
+  //   if (!app.isQuiting) {
+  //     event.preventDefault();
+  //     win.hide();
+  //   }
+
+  //   return false;
+  // });
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode
@@ -45,6 +72,8 @@ async function createWindow() {
     // Load the index.html when not in development
     win.loadURL("app://./index.html");
   }
+
+  state.manage(win);
 }
 
 // Quit when all windows are closed.
