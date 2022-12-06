@@ -6,6 +6,8 @@ import Popper from "vue3-popper";
 import moment from "moment";
 import App from "@/App.vue";
 
+import axios from "axios";
+
 const pinia = createPinia();
 
 const app = createApp(App);
@@ -15,21 +17,24 @@ const app = createApp(App);
  * @returns returns timeAgo
  */
 
+axios.defaults.xsrfCookieName = "csrftoken";
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
+
 app.config.globalProperties.$filters = {
-  timeAgo(date: moment.MomentInput) {
+  timeAgo(date) {
     return moment(date).fromNow();
   },
-  dateToRandom(date: moment.MomentInput) {
+  dateToRandom(date) {
     // return moment(date).format("dddd, MMMM Do YYYY");
     return moment(date).format("YY-MM-DD");
   },
-  dateMoment(date: moment.MomentInput) {
+  dateMoment(date) {
     // return moment(date).format("dddd, MMMM Do YYYY");
     return moment(date).format("DD/MM/YYYY");
   },
-  reverse(items: string[]) {
+  reverse(items) {
     return items.slice().reverse();
   },
 };
 
-app.use(pinia).use(router).mount("#app");
+app.component("Popper", Popper).use(pinia).use(router).mount("#app");
