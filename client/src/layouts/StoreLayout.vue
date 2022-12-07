@@ -5,11 +5,9 @@ const TopNav = defineAsyncComponent(() =>
 );
 </script>
 <template>
-  <div class="flex h-screen inset-0 hide-print">
-    <div class="flex flex-1 inset-0 flex-col overflow-hidden">
-      <TopNav />
+  <div class="p-4">
 
-      <router-view></router-view>
-    </div>
+    <router-view></router-view>
+
   </div>
 </template>

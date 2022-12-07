@@ -1,22 +1,18 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { useUserStore } from "@/stores/user";
 
-import HomeView from "../views/HomeView.vue";
+const Status = () => import("@/pages/admin/Status.vue");
+const Credits = () => import("@/pages/admin/Credits.vue");
+const Archives = () => import("@/pages/admin/Archives.vue");
+const Settings = () => import("@/pages/admin/Settings.vue");
+const Documentation = () => import("@/pages/admin/Documentation.vue");
 
 const routes = [
-  {
-    path: "/",
-    name: "home",
-    component: HomeView,
-    meta: {
-      authRequired: false,
-    },
-  },
   {
     path: "/login",
     name: "login",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Login.vue"),
+      import(/* webpackChunkName: "about" */ "@/pages/Login.vue"),
     meta: {
       authRequired: false,
     },
@@ -26,13 +22,13 @@ const routes = [
     name: "store",
     redirect: "/store/orders",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../layouts/StoreLayout.vue"),
+      import(/* webpackChunkName: "about" */ "@/layouts/StoreLayout.vue"),
     children: [
       {
         path: "/store/orders",
         name: "orders",
         component: () =>
-          import(/* webpackChunkName: "about" */ "../views/OrderStore.vue"),
+          import(/* webpackChunkName: "about" */ "@/pages/StoreHome.vue"),
         meta: {
           authRequired: true,
         },
@@ -43,16 +39,29 @@ const routes = [
     },
   },
   {
-    path: "/about",
-    name: "about",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
-    meta: {
-      authRequired: false,
-    },
+    name: "Archives",
+    path: "/admin/archives",
+    component: Archives,
+  },
+  {
+    name: "Credits",
+    path: "/admin/credits",
+    component: Credits,
+  },
+  {
+    name: "Documentation",
+    path: "/admin/documentation",
+    component: Documentation,
+  },
+  {
+    name: "Settings",
+    path: "/admin/settings",
+    component: Settings,
+  },
+  {
+    name: "Status",
+    path: "/admin/status",
+    component: Status,
   },
 ];
 
