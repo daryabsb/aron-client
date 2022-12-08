@@ -179,6 +179,17 @@ const signIn = async () => {
   } catch (error) {
     console.log(error);
   }
+  // then load the cash register
+  try {
+    const cashRegisterResponse = await store.loadCashRegisterData();
+  } catch (error) {
+    console.log(error);
+  }
+  try {
+    await store.getMachineID();
+  } catch (error) {
+    console.log(error);
+  }
 
   // router.push('/')
   email.value = "";

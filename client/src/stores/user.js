@@ -1,12 +1,16 @@
 import { defineStore } from "pinia";
 import { useStorage } from "@vueuse/core";
+import usersAPI from "@/services/usersAPI";
+
 import axios from "axios";
 
 export const useUserStore = defineStore("user", {
   state: () => ({
     user: useStorage("user", {}),
+    machineID: useStorage("machineID", ""),
     token: useStorage("token", ""),
     signedIn: useStorage("signedIn", false),
+    register: useStorage("register", []),
   }),
 
   getters: {
@@ -22,6 +26,11 @@ export const useUserStore = defineStore("user", {
           Authorization: `Token ${this.token}`,
         },
       };
+    },
+    useCashRegister(state) {
+      return state.register.find(
+        (counter) => counter.number == state.machineID
+      );
     },
   },
 
@@ -66,6 +75,37 @@ export const useUserStore = defineStore("user", {
       this.user = {};
       this.token = "";
       this.signedIn = false;
+    },
+    // CASH REGISTER
+    async loadCashRegisterData() {
+      try {
+        const registerResponse = await usersAPI.getCashRegister(
+          this.useAuthHeader
+        );
+        this.register = registerResponse.data;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async getMachineID() {
+      const util = require("util");
+      const exec = util.promisify(require("child_process").exec);
+      const promise = exec("wmic csproduct get uuid");
+      const child = promise.child;
+      const { stdout, stderr } = await promise;
+      this.machineID = stdout.split("\n")[1].trim();
+      return this.machineID;
+    },
+    pingServer(url = "") {
+      const ping = require("web-pingjs");
+
+      ping(url)
+        .then(function (delta) {
+          console.log("Ping time was " + String(delta) + " ms");
+        })
+        .catch(function (err) {
+          console.error("Could not ping remote URL", err);
+        });
     },
   },
 });

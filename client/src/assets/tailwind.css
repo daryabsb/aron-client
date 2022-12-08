@@ -3,3 +3,34 @@
 @tailwind components;
 
 @tailwind utilities;
+
+@media print {
+  .hide-print {
+    display: none !important;
+  }
+  .print-area {
+    display: block;
+  }
+}
+
+@layer utilities {
+  .scrollbar::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  .scrollbar::-webkit-scrollbar-track {
+    border-radius: 100vh;
+    background: #252525;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb {
+    background: #595e57;
+    border-radius: 100vh;
+    border: 1px solid #f6f7ed;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #ee0566;
+  }
+}
