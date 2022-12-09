@@ -5,7 +5,6 @@ import UserNavigation from "@/dashboard/userNavigation/Index.vue";
 import { useUserStore } from "@/stores/user";
 
 const store = useUserStore();
-console.log(store.useCashRegister);
 
 const toggle = inject("toggle");
 </script>
@@ -38,7 +37,7 @@ const toggle = inject("toggle");
                 v-if="store.useCashRegister"
                 class="relative -ml-px inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white"
               >
-                {{ store.useCashRegister }}
+                {{ store.useCashRegister.name }}
               </label>
               <template #fallback>
                 <label

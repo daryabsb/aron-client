@@ -1,4 +1,4 @@
-import { DIGITS, OPERATORS } from "@/store/constants";
+import { DIGITS, OPERATORS } from "@/composables/constants";
 
 export default {
   isOperator(string) {

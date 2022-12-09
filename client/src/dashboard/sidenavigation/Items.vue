@@ -1,13 +1,13 @@
 <script setup>
-import SidenavItem from './Item.vue';
+import SidenavItem from "./Item.vue";
 
 /* ICONS */
-import HomeIcon from './icons/Home.vue';
-import StatusIcon from './icons/Status.vue';
-import CreditsIcon from './icons/Credits.vue';
-import SettingsIcon from './icons/Settings.vue';
-import ArchivesIcon from './icons/Archives.vue';
-import DocumentationIcon from './icons/Documentation.vue';
+import HomeIcon from "./icons/Home.vue";
+import StatusIcon from "./icons/Status.vue";
+import CreditsIcon from "./icons/Credits.vue";
+import SettingsIcon from "./icons/Settings.vue";
+import ArchivesIcon from "./icons/Archives.vue";
+import DocumentationIcon from "./icons/Documentation.vue";
 </script>
 
 <template>

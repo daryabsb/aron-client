@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import orderRoutes from "@/Orders/orderRoutes";
 import { useUserStore } from "@/stores/user";
 
 const Status = () => import("@/pages/admin/Status.vue");
@@ -7,7 +8,9 @@ const Archives = () => import("@/pages/admin/Archives.vue");
 const Settings = () => import("@/pages/admin/Settings.vue");
 const Documentation = () => import("@/pages/admin/Documentation.vue");
 
-const routes = [
+const allRoutes = [];
+
+const mainRoutes = [
   {
     path: "/login",
     name: "login",
@@ -18,15 +21,15 @@ const routes = [
     },
   },
   {
-    path: "/store",
-    name: "store",
-    redirect: "/store/orders",
+    path: "/shop",
+    name: "shop",
+    redirect: "/shop/orders",
     component: () =>
       import(/* webpackChunkName: "about" */ "@/layouts/StoreLayout.vue"),
     children: [
       {
-        path: "/store/orders",
-        name: "orders",
+        path: "/shop/orders",
+        name: "shop-orders",
         component: () =>
           import(/* webpackChunkName: "about" */ "@/pages/StoreHome.vue"),
         meta: {
@@ -65,6 +68,13 @@ const routes = [
   },
 ];
 
+const routes = allRoutes.concat(
+  mainRoutes,
+  // posRoutes,
+  orderRoutes
+  // managementRoutes
+);
+
 const router = createRouter({
   // eslint-disable-next-line
   history: createWebHistory(process.env.BASE_URL),
@@ -76,7 +86,7 @@ router.beforeEach((to) => {
   // the router is installed and pinia will be installed too
   const store = useUserStore();
   // console.log("router", to.meta.authRequired && store.signedIn);
-  console.log("router", to, store.signedIn);
+  // console.log("router", to, store.signedIn);
   if (to.meta.authRequired && !store.signedIn) return "/login";
 });
 export default router;
