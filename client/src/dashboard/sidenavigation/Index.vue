@@ -23,15 +23,12 @@ const style = {
 </script>
 
 <template>
-  <aside
-    class="top-0 h-screen bg-gray-900 text-white lg:absolute lg:z-40 lg:block"
-    :class="[
-      style[mobilePosition],
-      open
-        ? 'absolute duration-500 ease-in transition-all w-8/12 z-40 sm:w-5/12 md:w-64'
-        : 'duration-700 ease-out hidden transition-all lg:w-24',
-    ]"
-  >
+  <aside class="top-0 h-screen bg-gray-900 text-white lg:absolute lg:z-40 lg:block" :class="[
+    style[mobilePosition],
+    open
+      ? 'absolute duration-500 ease-in transition-all w-8/12 z-40 sm:w-5/12 md:w-64'
+      : 'duration-700 ease-out hidden transition-all lg:w-24',
+  ]">
     <div class="pb-32 lg:pb-12" @mouseenter="expand" @mouseleave="shrink">
       <SidenavHeader />
       <SidenavItems />

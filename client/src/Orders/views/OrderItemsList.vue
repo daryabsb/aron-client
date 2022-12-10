@@ -74,10 +74,17 @@ onBeforeUnmount(() => click.removeAllListeners());
         Quantity
       </button>
 
-      <button type="button"
-        class="relative truncate flex-grow -ml-px items-center rounded-sm border w-24 justify-center border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10">
-        {{ number }}
-      </button>
+      <Popper arrow>
+        <button type="button"
+          class="relative truncate flex-grow -ml-px items-center rounded-sm border w-24 justify-center border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10">
+          {{ number }}
+        </button>
+        <template #content="{ close }">
+          <div>
+            <button @click="close">Close</button>
+          </div>
+        </template>
+      </Popper>
     </span>
     <div ref="orderList" class="flex-grow inset-0 overflow-auto scrollbar mt-2">
       <OrderItem v-for="item in store.useActiveOrder.items" :key="item.number" :orderitem="item" class="cursor-pointer"

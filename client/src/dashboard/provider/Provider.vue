@@ -3,10 +3,14 @@ import { provide, ref, readonly, watch, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 
 const open = ref(false);
+const openPayment = ref(false)
 const route = useRoute();
 
 const toggle = () => {
   open.value = !open.value;
+};
+const togglePayment = () => {
+  openPayment.value = !openPayment.value;
 };
 
 const expand = () => {
@@ -32,6 +36,11 @@ provide('open', readonly(open));
 provide('toggle', toggle);
 provide('expand', expand);
 provide('shrink', shrink);
+
+// modals provide
+// PAYMENT
+provide("openPayment", readonly(openPayment))
+provide("togglePayment", togglePayment)
 </script>
 
 <template>

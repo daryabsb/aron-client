@@ -152,33 +152,7 @@ const selectItem = (item) => {
   ids.value.push(item.number);
   loadProductsByGroupId();
 };
-const data = [
-  {
-    style: {
-      background: "bg-yellow-200",
-      progressbar: "bg-yellow-700",
-      text: "text-yellow-600",
-    },
-    info: {
-      date: "December 10, 2020",
-      title: "Web Designing",
-      subtitle: "Prototyping",
-      progress: "90%",
-      timeLeft: "2 Days Left",
-      participants: [
-        {
-          image:
-            "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80",
-        },
-        {
-          image:
-            "https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fG1hbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60",
-        },
-      ],
-    },
-  },
 
-];
 </script>
 
 <template>
