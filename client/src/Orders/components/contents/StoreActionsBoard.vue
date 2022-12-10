@@ -177,186 +177,21 @@ const data = [
       ],
     },
   },
-  {
-    style: {
-      background: "bg-gray-200",
-      progressbar: "bg-indigo-700",
-      text: "text-indigo-600",
-    },
-    info: {
-      date: "December 10, 2020",
-      title: "Web Designing",
-      subtitle: "Prototyping",
-      progress: "60%",
-      progressClass: "w-7/12",
-      timeLeft: "2 Days Left",
-      participants: [
-        {
-          image:
-            "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80",
-        },
-        {
-          image:
-            "https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fG1hbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60",
-        },
-      ],
-    },
-  },
-  {
-    style: {
-      background: "bg-green-200",
-      progressbar: "bg-green-700",
-      text: "text-green-600",
-    },
-    info: {
-      date: "December 10, 2020",
-      title: "Web Designing",
-      subtitle: "Prototyping",
-      progress: "60%",
-      progressClass: "w-7/12",
-      timeLeft: "2 Days Left",
-      participants: [
-        {
-          image:
-            "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80",
-        },
-        {
-          image:
-            "https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fG1hbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60",
-        },
-      ],
-    },
-  },
-  {
-    style: {
-      background: "bg-blue-200",
-      progressbar: "bg-blue-700",
-      text: "text-blue-600",
-    },
-    info: {
-      date: "December 10, 2020",
-      title: "Web Designing",
-      subtitle: "Prototyping",
-      progress: "15%",
-      progressClass: "w-2/12",
-      timeLeft: "2 Days Left",
-      participants: [
-        {
-          image:
-            "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80",
-        },
-        {
-          image:
-            "https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fG1hbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60",
-        },
-      ],
-    },
-  },
-  {
-    style: {
-      background: "bg-red-200",
-      progressbar: "bg-red-700",
-      text: "text-red-600",
-    },
-    info: {
-      date: "December 10, 2020",
-      title: "Web Designing",
-      subtitle: "Prototyping",
-      progress: "80%",
-      progressClass: "w-10/12",
-      timeLeft: "2 Days Left",
-      participants: [
-        {
-          image:
-            "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80",
-        },
-        {
-          image:
-            "https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fG1hbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60",
-        },
-      ],
-    },
-  },
-  {
-    style: {
-      background: "bg-purple-200",
-      progressbar: "bg-purple-700",
-      text: "text-purple-600",
-    },
-    info: {
-      date: "December 10, 2020",
-      title: "Web Designing",
-      subtitle: "Prototyping",
-      progress: "60%",
-      progressClass: "w-6/12",
-      timeLeft: "2 Days Left",
-      participants: [
-        {
-          image:
-            "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80",
-        },
-        {
-          image:
-            "https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fG1hbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60",
-        },
-      ],
-    },
-  },
-  {
-    style: {
-      background: "bg-purple-200",
-      progressbar: "bg-purple-700",
-      text: "text-purple-600",
-    },
-    info: {
-      date: "December 10, 2020",
-      title: "Web Designing",
-      subtitle: "Prototyping",
-      progress: "60%",
-      progressClass: "w-6/12",
-      timeLeft: "2 Days Left",
-      participants: [
-        {
-          image:
-            "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80",
-        },
-        {
-          image:
-            "https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fG1hbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60",
-        },
-      ],
-    },
-  },
+
 ];
 </script>
 
 <template>
-  <div
-    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 gap-3"
-  >
+  <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-3">
     <template v-if="ids.length === 0">
-      <SingleGroupBox
-        v-for="(group, index) in productGroups"
-        :key="index"
-        :item="group"
-        @select-item="selectGroup(group.id)"
-      />
+      <SingleGroupBox v-for="(group, index) in productGroups" :key="index" :item="group"
+        @select-item="selectGroup(group.id)" />
     </template>
     <template v-else>
-      <SingleGroupBox
-        :item="selectedGroupProducts"
-        :is-back="true"
-        @back="removeId"
-        @select-item="selectGroup(group.id)"
-      />
-      <SingleGroupBox
-        v-for="product in selectedGroupProducts"
-        :key="product.id"
-        :item="product"
-        @add-to-cart="createOrder(product)"
-        @back="removeId"
-        @select-item="selectGroup(product.id)"
-      />
+      <SingleGroupBox :item="selectedGroupProducts" :is-back="true" @back="removeId"
+        @select-item="selectGroup(group.id)" />
+      <SingleGroupBox v-for="product in selectedGroupProducts" :key="product.id" :item="product"
+        @add-to-cart="createOrder(product)" @back="removeId" @select-item="selectGroup(product.id)" />
     </template>
   </div>
 </template>

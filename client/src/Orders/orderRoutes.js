@@ -38,8 +38,8 @@ const routes = [
         },
 
         beforeEnter: (to, from, next) => {
-          console.log("to", to);
-          console.log(from);
+          // console.log("to", to);
+          // console.log(from);
           to.params.from = from.path;
           next();
         },

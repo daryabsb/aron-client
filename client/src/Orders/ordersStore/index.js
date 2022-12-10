@@ -1,6 +1,7 @@
 import { ref, computed } from "vue";
 import { defineStore } from "pinia";
 import { useStorage } from "@vueuse/core";
+import { useRouter } from "vue-router";
 import ordersAPI from "@/services/ordersAPI";
 import { useUtils } from "@/Orders/orderComposables/useUtils";
 import { modals } from "@/Orders/orderComposables/useModals";
@@ -54,7 +55,6 @@ export const useOrderStore = defineStore("orders", {
     async generateNumber(target) {
       try {
         const response = await ordersAPI.getNumber(target);
-
         return response.data;
       } catch (error) {
         console.log(error);
@@ -63,10 +63,28 @@ export const useOrderStore = defineStore("orders", {
     async createCart(number) {
       const order = new Order({ number: number });
       this.cart = [order, ...this.cart].unique();
-      // localStorage.setItem("cart", JSON.stringify(cart.value));
-      const utils = useUtils();
-      utils.updateChange();
+      this.updateChange();
       return order;
+    },
+    async deleteOrder(number = this.useActiveOrder.number) {
+      const index = this.cart.findIndex((order) => order.number == number);
+
+      if (index == 0) {
+        this.cart[0].items = [];
+        return;
+        // this.activeNumber = await this.cart[0].number;
+      } else if (index == 0 && this.cart.length == 1) {
+        this.cart.shift();
+        this.activeNumber = await this.cart[0].number;
+      } else {
+        this.cart.splice(index, 1);
+        this.activeNumber = await this.cart[index - 1].number;
+      }
+
+      await this.router.push(`/store/order/${this.activeNumber}`);
+
+      // this.router.push(`/store/order/${this.activeNumber}`);
+      // const item = this.useActiveOrder.items[index];
     },
     async submitOrder(data) {
       // TASKS:
@@ -82,7 +100,6 @@ export const useOrderStore = defineStore("orders", {
           total: this.useActiveOrder.totalPrice,
         };
         const ordersResponse = await ordersAPI.submitOrder(orderPayload);
-        console.log("Order is done");
       } catch (error) {
         console.log("submitOrderError", error);
       }
@@ -111,7 +128,6 @@ export const useOrderStore = defineStore("orders", {
             itemPayload
           );
         });
-        console.log("Items is done");
       } catch (error) {
         console.log("submitOrderItemsError", error);
       }
@@ -139,7 +155,6 @@ export const useOrderStore = defineStore("orders", {
         newOrders = ordersResponse.data.map(
           (order) => (order = new Order(order))
         );
-
         // All Items shoulld be converted to local  items
         newOrders.forEach((order) => {
           if (order.items.length > 0) {
@@ -148,19 +163,11 @@ export const useOrderStore = defineStore("orders", {
             );
           }
         });
-
-        // if (storageCart && storageCart.length > 0) {
-        // cart.value = [...newOrders, ...storageCart].unique();
         this.cart = [...this.cart, ...newOrders].unique();
-        // } else cart.value = [...newOrders];
-        // localStorage.setItem("cart", JSON.stringify(cart.value));
-
-        // store.activeNumber = store.cart[0].number;
       } catch (error) {
         console.log(error);
       }
-      const utils = useUtils();
-      utils.updateChange();
+      this.updateChange();
       // return newOrders;
     },
 
@@ -168,9 +175,7 @@ export const useOrderStore = defineStore("orders", {
       this.activeNumber = number;
     },
     setActiveItem(item) {
-      console.log("item set from store", item);
       this.activeItem = item;
-      console.log("activeItem set from store", this.activeItem);
     },
 
     generateUID() {
@@ -192,13 +197,22 @@ export const useOrderStore = defineStore("orders", {
         const newItem = new OrderItem(orderItem.value);
         // PROBLEM PROBLEM PROBLEM
         this.useActiveOrder.items.push(orderItem.value);
+        // this.useActiveOrder.items.push(newItem);
+        const item = this.useActiveOrder.items.find(
+          (i) => i.number === orderItem.value.number
+        );
+        this.setActiveItem(item);
       } else {
-        addQty(orderItem.value, (orderItem.value.quantity = 1), index);
+        this.addQty(orderItem.value, (orderItem.value.quantity = 1), index);
       }
-      const utils = useUtils();
       // updateLocalStorage();
-      utils.beep();
-      utils.updateChange();
+      this.beep();
+      this.updateChange();
+    },
+    deleteItem() {
+      const index = this.useOrderItemIndex(this.activeItem);
+      // const item = this.useActiveOrder.items[index];
+      this.useActiveOrder.items.splice(index, 1);
     },
     addQty(orderItem, quantity, index) {
       if (!index) index = this.useOrderItemIndex(orderItem);
@@ -206,16 +220,14 @@ export const useOrderStore = defineStore("orders", {
       const afterAdd = item.quantity + quantity;
       if (afterAdd === 0) {
         this.useActiveOrder.items.splice(index, 1);
-        const utils = useUtils();
-        utils.clearSound();
+        this.clearSound();
       } else {
         item.quantity = afterAdd;
-        const utils = useUtils();
-        utils.beep();
+        this.setActiveItem(item);
+        this.beep();
       }
-      const utils = useUtils();
       // updateLocalStorage();
-      utils.updateChange();
+      this.updateChange();
     },
     appllyItemDiscount(discountType, discount) {
       // const cartOrderItem = useActiveOrder.value.items.find(
@@ -225,9 +237,8 @@ export const useOrderStore = defineStore("orders", {
         this.activeItem.discount = discount;
         this.activeItem.discount_type = discountType;
 
-        const utils = useUtils();
         // updateLocalStorage();
-        utils.updateChange();
+        this.updateChange();
       } catch (error) {
         console.log(error);
       }
@@ -240,9 +251,8 @@ export const useOrderStore = defineStore("orders", {
         cartItem.discount = discount;
         cartItem.discount_type = discountType;
 
-        const utils = useUtils();
         // updateLocalStorage();
-        utils.updateChange();
+        this.updateChange();
       } catch (error) {
         console.log(error);
       }
@@ -279,9 +289,7 @@ export const useOrderStore = defineStore("orders", {
     },
 
     async openDiscountModal() {
-      console.log("we are here", modals.openOrderDiscountModal);
       modals.openOrderDiscountModal = true;
-      console.log("this is modals", modals.openOrderDiscountModal);
     },
   },
 });

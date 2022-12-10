@@ -1,6 +1,7 @@
 import { createApp } from "vue";
 import "./assets/tailwind.css";
 import router from "./router";
+import { markRaw } from "vue";
 import { createPinia } from "pinia";
 import Popper from "vue3-popper";
 import moment from "moment";
@@ -36,5 +37,10 @@ app.config.globalProperties.$filters = {
     return items.slice().reverse();
   },
 };
+
+pinia.use(({ store }) => {
+  store.router = markRaw(router);
+});
+// app.use(pinia)
 
 app.component("Popper", Popper).use(pinia).use(router).mount("#app");
