@@ -9,7 +9,6 @@ export default {
     return API().get(`/orders/items/${oid}/`, useUserStore().useAuthHeader);
   },
   getNumber(target) {
-    console.log("From ordersAPI", useUserStore().useAuthHeader);
     return API().get(
       `/orders/number/?target=${target}`,
       useUserStore().useAuthHeader

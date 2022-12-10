@@ -19,7 +19,9 @@ console.log(route);
     >
       <StoreActionsBoard />
     </div>
-    <div class="col-span-4 xl:col-span-3 row-span-9 p-2 rounded-md bg-gray-700">
+    <div
+      class="col-span-4 xl:col-span-3 row-span-9 px-1 rounded-md bg-gray-700"
+    >
       <router-view v-slot="{ Component }">
         <!-- <transition name="fade"> -->
         <component :is="Component" />

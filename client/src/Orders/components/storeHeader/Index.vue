@@ -26,7 +26,7 @@
               </svg>
             </div>
             <svg
-              class="pointer-events-none absolute left-0 ml-4 hidden h-6 w-6 fill-current text-gray-500 group-hover:text-gray-400 sm:block"
+              class="pointer-events-none absolute left-0 ml-4 hidden h-5 w-5 fill-current text-gray-500 group-hover:text-gray-400 sm:block"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
             >
@@ -36,7 +36,7 @@
             </svg>
             <input
               type="text"
-              class="bg-gray-700 w-full placeholder:text-xl rounded-md py-4 pl-16 pr-4 leading-3 text-2xl text-white focus:outline-none focus:border-transparent"
+              class="bg-gray-700 w-full placeholder:text-xl rounded-md pl-16 pr-4 leading-3 text-xl text-white focus:outline-none focus:border-transparent"
               placeholder="Search"
             />
           </div>
@@ -55,20 +55,26 @@
         <div class="flex justify-center items-center space-x-4">
           <a
             href="#"
-            class="flex justify-center items-center h-10 w-10 md:w-24 rounded-full md:rounded-md border border-transparent bg-gray-900 px-2 text-base font-medium text-white hover:bg-green-500"
+            class="flex justify-center items-center h-10 w-10 md:w-24 rounded-full md:rounded-sm border border-transparent bg-gray-900 px-2 text-base font-medium text-white hover:bg-gray-600"
             ><span class="md:hidden block">+</span>
-            <span class="hidden md:block">Sign up</span></a
+            <span class="hidden md:block">Save sale</span></a
           >
           <a
             href="#"
-            class="flex justify-center items-center h-10 w-10 md:w-24 rounded-full md:rounded-md border border-transparent bg-gray-900 px-2 text-base font-medium text-white hover:bg-green-500"
+            class="flex justify-center items-center h-10 w-10 md:w-24 rounded-full md:rounded-sm border border-transparent bg-green-600 px-2 text-base font-medium text-white hover:bg-green-500"
+            ><span class="md:hidden block">+</span>
+            <span class="hidden md:block">Payment</span></a
+          >
+          <a
+            href="#"
+            class="flex justify-center items-center h-10 w-10 md:w-24 rounded-full md:rounded-sm border border-transparent bg-gray-900 px-2 text-base font-medium text-white hover:bg-gray-600"
           >
             <span class="md:hidden block">+</span>
-            <span class="hidden md:block">Sign up</span>
+            <span class="hidden md:block">Cash</span>
           </a>
         </div>
       </div>
-      <div class="flex flex-wrap justify-center space-x-6 py-4 lg:hidden">
+      <div class="flex flex-wrap justify-center pb-2 space-x-6 lg:hidden">
         <a
           v-for="link in navigation"
           :key="link.name"
