@@ -1,28 +1,27 @@
 <template>
-  <TransitionRoot as="template" :show="true">
-    <Dialog as="div" class="relative z-10" @close="$emit('close')">
+  <TransitionRoot as="template" :show="open">
+    <Dialog as="div" class="relative z-50" @close="togglePayment">
+      <!-- <Dialog as="div" class="relative z-10" @close="togglePayment"> -->
       <TransitionChild as="template" enter="ease-out duration-300" enter-from="opacity-0" enter-to="opacity-100"
         leave="ease-in duration-200" leave-from="opacity-100" leave-to="opacity-0">
-        <div class="fixed inset-0 bg-aronium-900 bg-opacity-90 transition-opacity" />
+        <div class="fixed inset-0 bg-gray-900 bg-opacity-90 transition-opacity" />
       </TransitionChild>
       <div class="fixed inset-0 z-10 overflow-y-auto">
-        <div class="flex min-h-full items-end justify-center p-2 text-center sm:items-center sm:p-0">
+        <div class="flex min-h-full min-w-screen items-end justify-center p-2 text-center sm:items-center sm:p-0">
           <TransitionChild as="template" enter="ease-out duration-300"
             enter-from="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             enter-to="opacity-100 translate-y-0 sm:scale-100" leave="ease-in duration-200"
             leave-from="opacity-100 translate-y-0 sm:scale-100"
             leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
             <DialogPanel
-              class="relative bg-gray-800 sm:max-w-full transform overflow-hidden rounded-sm  border border-gray-500 text-left shadow-xl transition-all">
+              class="relative bg-gray-800 sm:max-w-full transform overflow-hidden rounded-sm border border-gray-500 text-left shadow-xl transition-all">
               <div>
-                <slot name="icon"></slot>
 
-                <div class="text-center">
-                  <DialogTitle as="h3">
-                    <slot name="title"></slot>
-                  </DialogTitle>
+
+                <div class="text-center w-full border-2 border-blue-800">
+
                   <div>
-                    <div class="inset-0 h-full flex items-center text-white">
+                    <div class="inset-0 h-full w-full flex items-center text-white">
                       <!-- ITEMS AT PAYMENT MODAL -->
                       <div class="inset-0 space-y-0 divide-x divide-gray-500 flex">
                         <div v-if="isShowItems" class="inset-0 h-full text-center bg-transparent text-white">
@@ -126,7 +125,7 @@
                           <div class="w-full h-full bg-gray-700 border-b border-r border-gray-500 text-left p-3">
                             <div class="relative flex items-center justify-between w-full h-12 bg-inherit">
                               <div class="flex items-center h-full">
-                                <button class="bg-red-600 py-4 px-12" @click="$emit('close')">
+                                <button class="bg-red-600 py-4 px-12" @click="togglePayment">
                                   <span><i class="fa fa-times"></i></span>
                                   Cancel
                                 </button>
@@ -138,12 +137,12 @@
                                   Discount
                                 </button>
                                 <button class="flex bg-inherit border border-gray-500 py-4 px-12 mr-1"
-                                  @click="$emit('close')">
+                                  @click="togglePayment">
                                   <span class="mr-2"><i class="fa fa-layer-group"></i></span>
                                   Rounds
                                 </button>
                                 <button class="flex bg-inherit border border-gray-500 py-4 px-12"
-                                  @click="$emit('close')">
+                                  @click="togglePayment">
                                   <span class="mr-2"><i class="fa fa-user"></i></span>
                                   Customer
                                 </button>
@@ -163,7 +162,7 @@
                                 <!-- Add Icon to this -->
                                 <button
                                   class="flex bg-inherit border border-gray-500 py-4 w-44 justify-center text-sm my-1"
-                                  @click="$emit('close')">
+                                  @click="togglePayment">
                                   Split Payment
                                 </button>
                               </div>
@@ -211,7 +210,8 @@
 
                                 <div class="relative flex justify-start w-full">
                                   Cash:
-                                  <input ref="input" v-model="store.cash" type="text"
+                                  <!-- v-model="store.cash"  -->
+                                  <input ref="input" type="text" :value="cashScreen"
                                     class="grow font-semibold text-3xl bg-inherit text-end focus:ring-0 border-0 border-b border-gray-500 focus:border-sky-500" />
                                   <span class="absolute left-12 top-2 text-xl">
                                     <i class="fa fa-pencil"></i>
@@ -219,15 +219,15 @@
                                 </div>
                                 <div class="flex justify-between w-full text-red-600">
                                   Change:
-                                  <span class="font-semibold text-2xl text-sky-500 ml-auto">{{
-                                      priceFormat(store.change)
+                                  <span class="font-semibold text-2xl text-sky-500 ml-auto">{{ priceFormat(store.change)
                                   }}
                                   </span>
                                 </div>
                                 <div class="flex justify-around w-full h-full bottom-0">
                                   <moneys></moneys>
 
-                                  <calculator></calculator>
+                                  <NumPad v-model="inputMoney" @close="calculateCash"
+                                    @update:calc-memory="updateInputMoney"></NumPad>
                                 </div>
                               </div>
                             </div>
@@ -253,6 +253,8 @@ import {
   computed,
   defineEmits,
   defineProps,
+  onMounted,
+  inject,
   defineAsyncComponent,
 } from "vue";
 import { useRouter } from "vue-router";
@@ -274,6 +276,7 @@ import {
 } from "@headlessui/vue";
 import Modal from "@/components/shared/Modal.vue";
 import Calculator from "@/components/shared/calculator/Calculator.vue";
+import NumPad from "@/components/shared/calculator/NumPad.vue";
 
 import Moneys from "@/Orders/components/Cards/Moneys.vue";
 import PaymentPopperDiscount from "@/Orders/components/Modals/PaymentPopperDiscount.vue";
@@ -282,18 +285,43 @@ import { useOrder } from "@/Orders/orderComposables/orderProperties";
 
 defineEmits(["close", "cashOut"]);
 defineProps({
-  open: { type: Boolean, default: true },
+  open: { type: Boolean, default: false },
 });
+const togglePayment = inject("togglePayment");
 const isShowItems = ref(true);
 const store = useOrderStore();
-const router = useRouter()
+const router = useRouter();
+onMounted(store.loadPaymentTypes);
+console.log("paymentTypes", store.usePaymentTypes);
 
 const priceFormat = store.priceFormat;
 watchEffect(() => store.updateChange());
 const selectedOrderItem = ref(null);
 watch(selectedOrderItem, () => store.setActiveItem(selectedOrderItem.value));
 
+// NEW CALCULATIONS
 const inputMoney = ref(0);
+const updateInputMoney = (memory) => (inputMoney.value = memory.value);
+
+const calculateCash = async () => {
+  console.log(store.cash, inputMoney.value)
+  await store.addCash(+inputMoney.value);
+  await store.updateChange()
+  inputMoney.value = 0
+}
+
+const cashScreen = computed(() => {
+  if (!store.cash && !inputMoney.value) {
+    return "0"
+  } else if (!inputMoney.value) {
+    return store.cash
+  } else if (!store.cash) {
+    return inputMoney.value
+  }
+  return `${store.cash} + ${inputMoney.value} = ${store.cash + +inputMoney.value}`
+
+})
+
 
 const isDiscount = computed(() => store.useActiveOrder.discount);
 

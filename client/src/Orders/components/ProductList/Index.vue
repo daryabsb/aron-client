@@ -18,8 +18,8 @@ const store = useOrderStore();
 const userStore = useUser();
 const addToCart = store.addToCart;
 
-const SingleGroupBox = defineAsyncComponent(() =>
-  import("@/Orders/components/contents/SingleGroupBox.vue")
+const ProductItem = defineAsyncComponent(() =>
+  import("@/Orders/components/ProductList/ProductItem.vue")
 );
 
 const productGroups = ref([]);
@@ -159,7 +159,7 @@ const selectItem = (item) => {
     class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-3"
   >
     <template v-if="ids.length === 0">
-      <SingleGroupBox
+      <ProductItem
         v-for="(group, index) in productGroups"
         :key="index"
         :item="group"
@@ -167,13 +167,13 @@ const selectItem = (item) => {
       />
     </template>
     <template v-else>
-      <SingleGroupBox
+      <ProductItem
         :item="selectedGroupProducts"
         :is-back="true"
         @back="removeId"
         @select-item="selectGroup(group.id)"
       />
-      <SingleGroupBox
+      <ProductItem
         v-for="product in selectedGroupProducts"
         :key="product.id"
         :item="product"

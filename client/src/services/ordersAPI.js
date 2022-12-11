@@ -15,7 +15,8 @@ export default {
     );
   },
   submitOrder(data) {
-    return API().post("/orders/all/", data);
+    const headers = useUserStore().useAuthHeader;
+    return API().post("/orders/all/", data, { headers });
   },
 
   submitOrderItem(data) {

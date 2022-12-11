@@ -1,12 +1,14 @@
 <template>
-
-  <Grid rows="4" cols="4" gap="2" class="w-full sm:max-w-md sm:h-auto sm:my-3 p-3 bg-inherit">
+  <!-- <Grid :rows="4" :cols="4" :gap="2"
+    class="h-full w-full sm:my-4 p-3 pt-8 sm:rounded-sm bg-inherit border border-gray-500"> -->
+  <div
+    class="h-full w-full grid grid-cols-4 grid-rows-4 gap-2 sm:my-4 p-3 pt-8 sm:rounded-sm bg-inherit border border-gray-500">
 
     <Button v-for="money in moneys" :key="money" class="col-span-2" variant="transparent" @click="addCash(money)">{{
         priceFormat(money)
     }}</Button>
-
-  </Grid>
+  </div>
+  <!-- </Grid> -->
 </template>
 <script>
 import Button from "@/components/shared/Button.vue";
