@@ -3,6 +3,7 @@ import { provide, ref, readonly, watch, onMounted } from "vue";
 import { useRoute } from "vue-router";
 
 const open = ref(false);
+const openModal = ref(false);
 
 const route = useRoute();
 
@@ -34,6 +35,13 @@ provide("toggle", toggle);
 provide("expand", expand);
 provide("shrink", shrink);
 
+
+const toggleModal = () => {
+  openModal.value = !openModal.value
+}
+
+provide("toggleModal")
+
 // modals provide
 // PAYMENT
 const openPayment = ref(false);
@@ -50,7 +58,7 @@ const toggleCash = () => {
 };
 provide("openCash", readonly(openCash));
 provide("toggleCash", toggleCash);
-
+console.log(process.env)
 // DISCOUNT
 const openDiscount = ref(false);
 const toggleDiscount = () => {

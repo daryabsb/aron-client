@@ -18,54 +18,46 @@ const item = computed(() => useOrderItem(props.orderitem));
 
 <template>
   <div>
-    <div
-      :class="[
-        store.useActiveItem == orderitem
-          ? 'bg-sky-500  border-transparent'
-          : 'bg-inherit hover:bg-gray-500',
-        'flex w-full rounded-md border-b border-gray-500 px-1 py-2  2xl:items-start',
-      ]"
-    >
-      <img
-        :src="item.product.image"
-        alt="profile image"
-        class="hidden xl:block h-12 w-12 rounded-lg object-cover"
-      />
+    <div :class="[
+      store.useActiveItem == orderitem
+        ? 'bg-sky-500  border-transparent'
+        : 'bg-inherit hover:bg-gray-500',
+      'flex w-full rounded-md border-b border-gray-500 px-1 py-1  2xl:items-start',
+    ]">
+      <img :src="item.product.image" alt="profile image" class="hidden xl:block h-12 w-12 rounded-lg object-cover" />
       <div class="w-full pl-4">
         <div class="flex w-full items-center justify-between">
           <div class="font-medium text-white">{{ item.product.name }}</div>
           <div class="flex cursor-pointer items-center justify-center">
-            <span class="font-semibold text-white mx-2" aria-hidden="true"
-              >{{ item.quantity + " " + item.product.measurement_unit }}
+            <span class="font-semibold text-white mx-2" aria-hidden="true">{{ item.quantity + " " +
+                item.product.measurement_unit
+            }}
             </span>
           </div>
         </div>
         <div class="flex justify-between">
           <p class="truncate text-sm">
-            <span class="text-white">
+            <span class="text-gray-400">
               {{ priceFormat(item.product.price) }}
               /
             </span>
-            <span
-              :class="[
-                item.discount ? 'line-through text-red-300' : 'text-white',
-              ]"
-            >
+            <span :class="[
+              item.discount ? 'line-through text-red-500' : 'text-white',
+            ]">
               {{ priceFormat(store.useActiveOrder.itemTotal(item)) }}
             </span>
-            <span v-if="item.discount">
+            <span v-if="item.discount" class="text-green-400">
               {{ " " }}
               {{
-                priceFormat(
-                  store.useActiveOrder.itemTotalWithItemDiscount(item)
-                )
+                  priceFormat(
+                    store.useActiveOrder.itemTotalWithItemDiscount(item)
+                  )
               }}
             </span>
           </p>
-          <span class="font-semibold text-white mx-2" aria-hidden="true"
-            >{{
+          <span class="font-semibold text-white mx-2" aria-hidden="true">{{
               priceFormat(store.useActiveOrder.itemTotalWithItemDiscount(item))
-            }}
+          }}
           </span>
         </div>
       </div>

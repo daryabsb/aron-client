@@ -1,8 +1,24 @@
 <script setup>
 import { inject, defineAsyncComponent } from "vue";
+// import { getEvt } from "@/Orders/orderComposables";
 import PaymentModal from "@/Orders/components/Modals/PaymentPopper.vue";
 import CashModal from "@/Orders/components/Modals/CashPopper.vue";
 import DiscountModal from "@/Orders/components/DiscountBoard/Index.vue"
+
+const togglePayment = inject("togglePayment");
+const toggleCash = inject("toggleCash");
+const toggleDiscount = inject("toggleDiscount");
+
+// const trigger = {
+//   payment: togglePayment(),
+//   cash: toggleCash(),
+//   discount: toggleDiscount(),
+// }
+
+// window.onkeydown = (evt) => {
+//   return getEvt(evt.key, trigger)();
+// };
+
 
 const openPayment = inject("openPayment");
 const openCash = inject("openCash");

@@ -14,6 +14,8 @@ import { useClick } from "@/composables/useClick";
 
 import OrderItem from "./OrderItem.vue";
 const store = useOrderStore();
+const priceFormat = store.priceFormat;
+
 const click = useClick();
 const orderList = ref(null);
 const activeOrderNumber = store.activeNumber;
@@ -59,6 +61,7 @@ const deleteSelectedItem = () => {
 const deleteActiveOrder = () => {
   store.deleteOrder()
 }
+const isDiscount = computed(() => store.useActiveOrder.discount);
 onBeforeUnmount(() => click.removeAllListeners());
 </script>
 <template>
@@ -90,6 +93,39 @@ onBeforeUnmount(() => click.removeAllListeners());
       <OrderItem v-for="item in store.useActiveOrder.items" :key="item.number" :orderitem="item" class="cursor-pointer"
         @click="setItem(item)" />
     </div>
+    <span class="sticky flex flex-col justify-between border-t mt-px border-gray-500 py-1 items-center ">
+      <div class="w-full flex justify-between items-center  text-sm font-medium text-white">
+        <p>Subtotal</p>
+        <p class="text-sm" :class="[
+          isDiscount
+            ? 'line-through text-red-500'
+            : 'text-green-400 font-semibold',
+          'flex items-baseline text-lg ',
+        ]"> {{ priceFormat(store.useActiveOrder.totalFirstDraft) }}</p>
+      </div>
+
+      <div v-if="isDiscount" class="w-full flex items-center  justify-between  text-sm font-medium text-white">
+        <p>Discounted price</p>
+        <p class="text-sm">
+          {{ priceFormat(store.useActiveOrder.totalWithDiscount) }}
+        </p>
+      </div>
+
+      <div class="w-full flex items-center  justify-between py-1 text-sm font-medium text-orange-400">
+        <p>Total tax</p>
+        <p class="text-sm">{{ priceFormat(store.useActiveOrder.totalTax) }}</p>
+      </div>
+
+
+
+      <div
+        class="w-full flex items-center  justify-between border-t border-dashed border-gray-500 py-3 text-sm font-medium text-white">
+        <p class="text-lg">Total</p>
+        <p class="text-xl font-semibold">
+          {{ priceFormat(store.useActiveOrder.totalPrice) }}
+        </p>
+      </div>
+    </span>
     <span class="sticky flex justify-center border-t mt-px border-gray-500 py-1 space-x-2 items-center shadow-sm">
       <button type="button" class="relative items-center rounded-sm w-32 justify-center 
         bg-red-600 px-4 py-1 text-sm font-medium text-white hover:bg-red-300 

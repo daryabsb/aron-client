@@ -31,6 +31,10 @@
     "slash": "^5.0.0",
     "vue": "^3.2.13",
     "vue-image-crop-upload": "^3.0.3",
+    "@tailwindcss/forms": "^0.5.3",
+    "@tailwindcss/aspect-ratio": "^0.4.2",
+    "@tailwindcss/line-clamp": "^0.4.2",
+    "@tailwindcss/typography": "^0.5.8",
     "vue-router": "^4.1.6",
     "vue3-popper": "^1.5.0",
     "web-pingjs": "^1.0.1"

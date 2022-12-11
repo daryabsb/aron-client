@@ -1,4 +1,4 @@
-import { computed } from "vue";
+import { computed, inject } from "vue";
 import { useOrderStore } from "@/Orders/ordersStore";
 import { useUser } from "@/Users/userStore";
 import usersAPI from "@/services/usersAPI";
@@ -64,7 +64,7 @@ export const calculateTax = (item) => {
   return item.total + taxRate;
 };
 
-export const getEvt = (key) => {
+export const getEvt = (key, trigger) => {
   const F8 = "F8";
   const F9 = "F9";
   const F4 = "F4";
@@ -73,15 +73,15 @@ export const getEvt = (key) => {
   const defaultKey = "default";
 
   const myKeys = {
-    [F8]: () => (store.openPaymentModal = true),
-    [F9]: () => (store.openCashModal = true),
-    [F4]: () => (store.openOrderDiscountModal = true),
+    [F8]: () => trigger.payment,
+    [F9]: () => trigger.cash,
+    [F4]: () => trigger.discount,
     [Control]: () => (store.searchModal = !store.searchModal),
     [Escape]: () => {
-      store.cashModal = false;
-      store.paymentModal = false;
-      store.searchModal = false;
-      store.orderDiscountModal = false;
+      togglePayment();
+      toggleCash();
+      // store.searchModal = false;
+      toggleDiscount();
     },
     [defaultKey]: () => {
       "none";
