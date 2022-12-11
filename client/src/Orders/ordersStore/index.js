@@ -131,12 +131,12 @@ export const useOrderStore = defineStore("orders", {
       } catch (error) {
         console.log("submitOrderItemsError", error);
       }
-      const number = await generateNumber("order");
+      const number = await this.generateNumber("order");
       const orderedIndex = this.cart.findIndex(
         (i) => i.number === this.useActiveOrder.number
       );
-      this.cart.splice(orderedIndex, 1);
-      const newOrder = await createCart(`${number}`);
+      await this.cart.splice(orderedIndex, 1);
+      const newOrder = await this.createCart(`${number}`);
       return newOrder;
     },
     async loadPaymentTypes() {

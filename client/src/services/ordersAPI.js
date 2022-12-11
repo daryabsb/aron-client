@@ -16,11 +16,12 @@ export default {
   },
   submitOrder(data) {
     const headers = useUserStore().useAuthHeader;
-    return API().post("/orders/all/", data, { headers });
+    return API().post("/orders/all/", data, headers);
   },
 
   submitOrderItem(data) {
-    return API().post("/orders/items/", data);
+    const headers = useUserStore().useAuthHeader;
+    return API().post("/orders/items/", data, headers);
   },
 
   // PAYMENT CALLS

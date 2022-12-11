@@ -3,6 +3,7 @@ import { ref, defineAsyncComponent } from "vue";
 import { useUserStore } from "@/stores/user";
 import { useIpcRenderer } from "@vueuse/electron";
 import DashboardLayout from '@/dashboard/Layout.vue';
+import Alert from "@/dashboard/provider/Alert.vue";
 
 const SignIn = defineAsyncComponent(() => import("@/components/SignIn.vue"));
 
@@ -19,8 +20,8 @@ const signIn = async () => {
 <template>
   <div class=" h-screen  bg-gray-900">
 
-
     <DashboardLayout>
+      <Alert />
       <!-- <router-view /> -->
       <router-view />
     </DashboardLayout>

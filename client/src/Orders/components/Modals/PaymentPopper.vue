@@ -288,6 +288,7 @@ defineProps({
   open: { type: Boolean, default: false },
 });
 const togglePayment = inject("togglePayment");
+const toggleAlert = inject("toggleAlert");
 const isShowItems = ref(true);
 const store = useOrderStore();
 const router = useRouter();
@@ -359,8 +360,16 @@ const selectItem = (item) => {
 };
 
 const submitOrder = async (pType, emit) => {
-  const newOrder = await store.submitOrder(pType);
-  await router.push(`/store/order/${newOrder.number}`);
-  await emit("close");
+  togglePayment()
+  try {
+    const newOrder = await store.submitOrder(pType);
+    toggleAlert("success", { header: "Order saved!", body: "You order has been saved successfully!" })
+    await router.push(`/store/order/${newOrder.number}`);
+
+  } catch (error) {
+
+    toggleAlert("failed", { header: "Order not saved!", body: "You order was failed!" })
+  }
+
 };
 </script>

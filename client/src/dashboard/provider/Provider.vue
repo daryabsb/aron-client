@@ -67,6 +67,31 @@ const toggleDiscount = () => {
 provide("openDiscount", readonly(openDiscount));
 provide("toggleDiscount", toggleDiscount);
 
+
+// ALERT
+const showAlert = ref(false)
+const alertStatus = ref("success")
+const alertMessage = ref({
+  header: "Successfully saved!",
+  body: "Your request to the server was successfull!"
+})
+const closeAlert = () => showAlert.value = !showAlert.value
+const toggleAlert = (status = "success", msg) => {
+  alertStatus.value = status;
+  if (msg && Object.keys(msg).length > 0) alertMessage.value = msg;
+  showAlert.value = true
+
+  setTimeout(() => {
+    showAlert.value = false
+  }, 3000)
+}
+
+provide("showAlert", showAlert)
+provide("alertStatus", alertStatus)
+provide("alertMessage", alertMessage)
+provide("toggleAlert", toggleAlert)
+provide("closeAlert", closeAlert)
+
 </script>
 
 <template>

@@ -8,6 +8,7 @@ import Modals from "@/dashboard/provider/Modals.vue";
 
 <template>
   <DashboardProvider>
+
     <div class="flex flex-col items-start overflow-auto">
       <Overlay />
       <Modals />
