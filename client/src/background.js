@@ -43,7 +43,7 @@ async function createWindow() {
   win.maximize();
 
   win.webContents.on("context-menu", (e) => {
-    console.log(e);
+    // console.log(e);
     contextMenu.popup(win);
   });
 
