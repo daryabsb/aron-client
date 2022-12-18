@@ -58,7 +58,8 @@ const toggleCash = () => {
 };
 provide("openCash", readonly(openCash));
 provide("toggleCash", toggleCash);
-console.log(process.env)
+// console.log(process.env)
+
 // DISCOUNT
 const openDiscount = ref(false);
 const toggleDiscount = () => {
@@ -67,6 +68,14 @@ const toggleDiscount = () => {
 provide("openDiscount", readonly(openDiscount));
 provide("toggleDiscount", toggleDiscount);
 
+
+// CASH
+const openManagement = ref(false);
+const toggleManagement = () => {
+  openManagement.value = !openManagement.value;
+};
+provide("openManagement", readonly(openManagement));
+provide("toggleManagement", toggleManagement);
 
 // ALERT
 const showAlert = ref(false)

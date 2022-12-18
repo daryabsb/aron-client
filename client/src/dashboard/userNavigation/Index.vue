@@ -1,18 +1,18 @@
 <script setup>
+import { inject } from "vue";
+
 import { useUserStore } from "@/stores/user";
+
+const toggleManagement = inject("toggleManagement")
 
 const store = useUserStore();
 </script>
 <template>
-  <Popper hover>
-    <a href="#" class="relative block">
-      <img
-        alt="Maurice Lokumba"
-        :src="store.user.image"
-        class="mx-auto h-10 w-10 rounded-full object-cover"
-      />
-    </a>
-    <template #content="{ close }">
+  <!-- <Popper hover> -->
+  <button href="#" class="relative block" @click="toggleManagement">
+    <img alt="Maurice Lokumba" :src="store.user.image" class="mx-auto h-10 w-10 rounded-full object-cover" />
+  </button>
+  <!-- <template #content="{ close }">
       <div
         class="bg-white text-base z-50 float-left py-2 list-none text-left shadow-lg min-w-64 pr-16 mx-4 cursor-pointer"
       >
@@ -44,5 +44,5 @@ const store = useUserStore();
         >
       </div>
     </template>
-  </Popper>
+  </Popper> -->
 </template>

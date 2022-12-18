@@ -4,6 +4,11 @@ import { inject, defineAsyncComponent } from "vue";
 import PaymentModal from "@/Orders/components/Modals/PaymentPopper.vue";
 import CashModal from "@/Orders/components/Modals/CashPopper.vue";
 import DiscountModal from "@/Orders/components/DiscountBoard/Index.vue"
+import SlideModal from "@/components/shared/SlideModal.vue";
+
+const ManagementMenu = defineAsyncComponent(() =>
+  import("@/components/Navbars/ManagementMenu.vue")
+);
 
 const togglePayment = inject("togglePayment");
 const toggleCash = inject("toggleCash");
@@ -23,6 +28,9 @@ const toggleDiscount = inject("toggleDiscount");
 const openPayment = inject("openPayment");
 const openCash = inject("openCash");
 const openDiscount = inject("openDiscount");
+const openManagement = inject("openManagement");
+
+
 </script>
 
 <template>
@@ -32,5 +40,7 @@ const openDiscount = inject("openDiscount");
     <PaymentModal :open="openPayment" />
     <CashModal :open="openCash" />
     <DiscountModal :open="openDiscount" />
+    <!-- <SlideModal :open="openManagement" /> -->
+    <ManagementMenu :open="openManagement" />
   </div>
 </template>
