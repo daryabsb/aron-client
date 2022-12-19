@@ -18,7 +18,7 @@
                 d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z" />
             </svg>
             <input type="text"
-              class="bg-gray-700 w-full placeholder:text-xl rounded-md pl-16 pr-4 leading-3 text-xl text-white focus:outline-none focus:border-transparent"
+              class="bg-gray-700 w-full placeholder:text-xl border-0 pl-16 pr-4 leading-3 text-md text-white focus:outline-none focus:border-transparent"
               placeholder="Search" />
           </div>
         </div>

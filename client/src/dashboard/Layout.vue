@@ -12,11 +12,11 @@ import Modals from "@/dashboard/provider/Modals.vue";
     <div class="flex flex-col items-start overflow-auto">
       <Overlay />
       <Modals />
-      <SideNavigation mobile-position="left" />
-      <div class="relative w-full pl-0 lg:pl-20">
+      <!-- <SideNavigation mobile-position="left" /> -->
+      <div class="relative w-full">
         <TopNavigation class="absolute top-0" />
 
-        <main class="h-screen mx-4">
+        <main class="h-screen">
           <slot />
         </main>
       </div>

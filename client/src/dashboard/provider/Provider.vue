@@ -60,6 +60,14 @@ provide("openCash", readonly(openCash));
 provide("toggleCash", toggleCash);
 // console.log(process.env)
 
+// SETTINGS SIDEBAR
+const openSettingsSidebar = ref(false);
+const toggleSettingsSidebar = () => {
+  openSettingsSidebar.value = !openSettingsSidebar.value;
+};
+provide("openSettingsSidebar", readonly(openSettingsSidebar));
+provide("toggleSettingsSidebar", toggleSettingsSidebar);
+
 // DISCOUNT
 const openDiscount = ref(false);
 const toggleDiscount = () => {

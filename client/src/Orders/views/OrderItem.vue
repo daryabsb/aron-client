@@ -37,7 +37,7 @@ const item = computed(() => useOrderItem(props.orderitem));
         </div>
         <div class="flex justify-between">
           <p class="truncate text-sm">
-            <span class="text-gray-400">
+            <span class="text-gray-200">
               {{ priceFormat(item.product.price) }}
               /
             </span>

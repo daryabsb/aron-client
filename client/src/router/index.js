@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import orderRoutes from "@/Orders/orderRoutes";
+import settingsRoutes from "@/Settings/settingsRoutes";
 import { useUserStore } from "@/stores/user";
 
 const Status = () => import("@/pages/admin/Status.vue");
@@ -71,8 +72,9 @@ const mainRoutes = [
 const routes = allRoutes.concat(
   mainRoutes,
   // posRoutes,
-  orderRoutes
+  orderRoutes,
   // managementRoutes
+  settingsRoutes
 );
 
 const router = createRouter({

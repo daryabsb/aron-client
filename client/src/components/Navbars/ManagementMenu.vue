@@ -137,10 +137,19 @@
 
                   <div class="flex flex-shrink-0 justify-around px-4 py-4">
                     <span class="isolate inline-flex rounded-md shadow-sm">
-                      <button type="button"
-                        class="relative inline-flex items-center px-8 py-2 text-sm font-medium hover:bg-gray-50 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500">
+                      <router-link to="/settings" type="button"
+                        class="group relative inline-flex items-center px-8 py-2 text-sm font-medium hover:text-gray-500 focus:z-10 "
+                        @click="toggleManagement">
                         <AdjustmentsVerticalIcon class="h-6 w-6" aria-hidden="true" />
-                      </button>
+                        <div
+                          class="opacity-0 w-28 bg-white text-gray-500 text-center text-xs rounded-lg py-2 absolute z-10 group-hover:opacity-75 bottom-full -left-1/2 ml-14 px-3 pointer-events-none">
+                          Settings
+                          <svg class="absolute text-black h-2 w-full left-0 top-full" x="0px" y="0px"
+                            viewBox="0 0 255 255" xml:space="preserve">
+                            <polygon class="fill-current" points="0,0 127.5,127.5 255,0" />
+                          </svg>
+                        </div>
+                      </router-link>
                       <button type="button"
                         class="relative -ml-px inline-flex items-center px-8 py-2 text-sm font-medium hover:bg-gray-50 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500">
                         <ArrowsPointingOutIcon class="h-6 w-6" aria-hidden="true" />

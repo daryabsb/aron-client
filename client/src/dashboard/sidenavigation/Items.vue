@@ -28,7 +28,7 @@ import DocumentationIcon from "./icons/Documentation.vue";
       <CreditsIcon />
     </SidenavItem>
 
-    <SidenavItem title="Settings" to="/admin/settings">
+    <SidenavItem title="Settings" to="/settings">
       <SettingsIcon />
     </SidenavItem>
 

@@ -1,25 +1,51 @@
 <script setup>
-import { inject } from "vue";
+import { computed, inject } from "vue";
+import { useRouter } from "vue-router";
+import {
+  Bars3BottomLeftIcon,
+  ArrowLeftIcon,
+} from '@heroicons/vue/24/outline'
 import UserNavigation from "@/dashboard/userNavigation/Index.vue";
 // import { LoginIcon } from "@heroicons/vue/24/solid"
 import { useUserStore } from "@/stores/user";
 
 const store = useUserStore();
+const router = useRouter()
+const curentPath = computed(() => router.currentRoute.value.matched.map(link => link.name))
+
+const goBackToStore = () => {
+  if (store.activeNumber) {
+    router.push(`store/order/${store.activeNumber}`)
+  } else {
+    router.push('/store')
+  }
+}
 
 const toggle = inject("toggle");
+const toggleSettingsSidebar = inject("toggleSettingsSidebar")
 </script>
 
 <template>
-  <header class="relative z-10 h-20 items-center">
+  <header class="relative z-10 py-2 items-center">
     <div class="relative z-10 mx-auto flex h-full flex-col justify-center px-3 text-white">
       <div class="relative flex w-full items-center pl-1 sm:ml-0 sm:pr-2">
         <div class="group relative flex h-full w-12 items-center lg:hidden">
-          <button type="button" class="text-4xl text-white focus:outline-none" @mouseenter="toggle">
+          <!-- <button type="button" class="text-4xl text-white focus:outline-none" @mouseenter="toggle">
             &#8801;
+          </button> -->
+          <button type="button" class=" px-4 text-white focus:outline-none  md:hidden" @click="toggleSettingsSidebar">
+            <span class="sr-only">Open sidebar</span>
+            <Bars3BottomLeftIcon class="h-6 w-6" aria-hidden="true" />
           </button>
+
         </div>
         <!-- <div class="container relative left-0 flex h-full w-5/6"> -->
-
+        <div class="w-full h-full bg-gray-900 flex justify-start items-center">
+          <span @click="goBackToStore" class="pb-2 p-4 text-white">
+            <ArrowLeftIcon class="h-8 w-8" />
+          </span>
+          <h1 class="text-xl text-white capitalize">{{ curentPath.join(' - ') }}</h1>
+        </div>
         <div class="relative ml-5 flex w-full items-center justify-end p-1 sm:right-auto sm:mr-0">
           <span class="isolate inline-flex shadow-sm mr-16 space-x-6">
             <Suspense>
