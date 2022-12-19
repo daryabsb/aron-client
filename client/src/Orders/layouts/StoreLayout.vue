@@ -11,11 +11,12 @@
               <div class="lg:p-24">
                 <!-- :to="{ name: 'StoreOrderCreate', params: { create: true } }" -->
                 <h1
-                  class="inline-flex items-center rounded-sm font-semibold cursor-pointer bg-black p-1 pr-2 text-white hover:text-aronium-500 sm:text-base lg:text-sm xl:text-base"
+                  class="inline-flex items-center rounded-sm cursor-pointer bg-black p-1 pr-2 text-white hover:text-gray-500 sm:text-base lg:text-sm"
                   @click="addNewOrder">
-                  <span class="rounded-sm bg-pink-700 px-3 py-0.5 text-sm font-semibold leading-5 text-white">Keep the
-                    changes</span>
-                  <span class="ml-4 text-sm">Go to store page</span>
+                  <span class="rounded-sm bg-pink-700 px-3 py-0.5   text-white font-poppins">
+                    <p class="font-poppins">Starting a new order?</p>
+                  </span>
+                  <span class="ml-4 text-sm">Create a new order</span>
                   <ChevronRightIcon class="ml-2 h-5 w-5 text-gray-500" aria-hidden="true" />
                 </h1>
 

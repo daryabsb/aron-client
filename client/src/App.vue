@@ -18,7 +18,7 @@ const signIn = async () => {
 };
 </script>
 <template>
-  <div class=" h-screen  bg-gray-900">
+  <div class=" h-screen dark:bg-white  bg-zinc-800">
 
     <DashboardLayout>
       <Alert />

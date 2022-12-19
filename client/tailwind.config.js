@@ -1,9 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  // mode: "jit",
+  mode: "class",
   content: ["./public/**/*.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
   presets: [],
-  darkMode: "media", // or 'class'
+  // darkMode: "media", // or 'class'
+  darkMode: "class", // or 'class'
   theme: {
     screens: {
       sm: "640px",
@@ -368,6 +369,7 @@ module.exports = {
     fontFamily: {
       sans: [
         "ui-sans-serif",
+        // "poppins",
         "system-ui",
         "-apple-system",
         "BlinkMacSystemFont",
@@ -390,8 +392,10 @@ module.exports = {
         "Times",
         "serif",
       ],
+      poppins: ["poppins"],
       mono: [
         "ui-monospace",
+        // "poppins",
         "SFMono-Regular",
         "Menlo",
         "Monaco",
