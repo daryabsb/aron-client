@@ -8,6 +8,7 @@
 @font-face {
   font-family: "poppins";
   src: url("../../public/fonts/poppins/Poppins-Light.ttf");
+  /* src: url("../../public/fonts/poppins/Poppins-Light.ttf"); */
 }
 
 @media print {

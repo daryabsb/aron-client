@@ -79,7 +79,7 @@
 
 
             </div> -->
-            <div class="flex flex-nowrap flex-grow ">
+            <div class="flex flex-nowrap  h-full">
                 <!-- Static sidebar for desktop -->
                 <div class="hidden md:flex md:w-64 md:flex-col">
                     <!-- Sidebar component, swap this element with another sidebar if you like -->
@@ -104,23 +104,16 @@
                         </div>
                     </div>
                 </div>
-                <main class="flex inset-0">
+                <main class="flex w-full inset-0 overflow-auto scrollbar">
 
                     <div class="h-full w-full p-4">
                         <div class=" h-full w-full ">
                             <router-view></router-view>
                         </div>
-                        <div class="mx-auto w-full px-4 sm:px-6 md:px-8">
-                            <!-- Replace with your content -->
-                            <div class="py-4">
-
-                            </div>
-                            <!-- /End replace -->
-                        </div>
                     </div>
                 </main>
             </div>
-            <div class="flex justify-end items-center px-12 border-t border-gray-500 h-12 ">
+            <div class="flex justify-end items-center px-12 border-t border-gray-500 bg-pink-600 ">
                 <button class="bg-green-500 text-white hover:bg-green-300 w-24 mt-3 mx-2 py-2 capitalize"
                     @click="submitSettings">save</button>
                 <button class="bg-red-500 text-white hover:bg-red-300 w-24 mt-3 py-2 capitalize"

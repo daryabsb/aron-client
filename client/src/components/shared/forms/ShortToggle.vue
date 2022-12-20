@@ -1,5 +1,5 @@
 <template>
-    <Switch :value="enabled"
+    <Switch
         class="group relative inline-flex h-5 w-10 flex-shrink-0 cursor-pointer items-center justify-center rounded-sm ">
         <span class="sr-only">Use setting</span>
         <span aria-hidden="true" class="pointer-events-none absolute h-full w-full rounded-sm bg-zinc-800" />
