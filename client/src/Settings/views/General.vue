@@ -19,9 +19,16 @@ import ToggleCheck from "@/components/shared/forms/ToggleCheck.vue"
 import ShortToggle from '@/components/shared/forms/ShortToggle.vue';
 
 const enVirtKeyboard = ref(false)
-const showCloseAlert = ref(true)
+const showCloseAlert = ref(false)
+const closeAlert = ref(true)
+const slideIn = ref(true)
 const rows = ref(0)
 const cols = ref(0)
+const alertDuration = ref(3)
+const changeAlertDuration = (amount) => {
+    if (amount === -1 && alertDuration.value === 0) return
+    amount === -1 ? alertDuration.value-- : alertDuration.value++
+}
 const changeCol = (amount) => {
     if (amount === -1 && cols.value === 0) return
     amount === -1 ? cols.value-- : cols.value++
@@ -170,16 +177,16 @@ const changeRow = (amount) => {
                         success or failed operations.</p>
                 </div>
                 <div class="space-y-2 ">
-                    <div class="pt-5 sm:pt-4">
-                        <div class="sm:grid sm:grid-cols-3 sm:items-baseline sm:gap-4">
+                    <div class="pt-3 sm:pt-2">
+                        <div class="sm:grid sm:grid-cols-3 sm:items-center  sm:gap-4">
                             <div class="text-base font-medium text-gray-900 sm:text-sm sm:text-white" id="label-email">
                                 Show close button</div>
                             <div class="mt-4 sm:col-span-2 sm:mt-0">
                                 <div class="max-w-lg space-y-4">
                                     <div class="relative flex items-start">
                                         <div class="flex h-5 items-center">
-                                            <ToggleCheck :checked="showCloseAlert"
-                                                @click="showCloseAlert = !showCloseAlert" />
+                                            <ShortToggle :enabled="showCloseAlert"
+                                                @click="(showCloseAlert = !showCloseAlert)" />
                                         </div>
                                     </div>
                                 </div>
@@ -188,7 +195,7 @@ const changeRow = (amount) => {
                     </div>
                     <div class="pt-3 sm:pt-2">
                         <div role="group">
-                            <div class="sm:grid sm:grid-cols-3 sm:items-baseline sm:gap-4">
+                            <div class="sm:grid sm:grid-cols-3 sm:items-center sm:gap-4">
                                 <div>
                                     <div class="text-base font-medium text-gray-900 sm:text-sm sm:text-white"
                                         id="label-email">Close on click</div>
@@ -198,12 +205,66 @@ const changeRow = (amount) => {
                                         <div class="relative flex items-start">
                                             <div class="flex h-5 items-center">
                                                 <ShortToggle :enabled="closeAlert"
-                                                    @click="showCloseAlert = !showCloseAlert" />
+                                                    @click="(closeAlert = !closeAlert)" />
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="pt-3 sm:pt-2">
+                        <div class="sm:grid sm:grid-cols-3 sm:items-center  sm:gap-4">
+                            <div class="text-base font-medium text-gray-900 sm:text-sm sm:text-white" id="label-email">
+                                Slide in</div>
+                            <div class="mt-4 sm:col-span-2 sm:mt-0">
+                                <div class="max-w-lg space-y-4">
+                                    <div class="relative flex items-start">
+                                        <div class="flex h-5 items-center">
+                                            <ShortToggle :enabled="slideIn" @click="(slideIn = !slideIn)" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pt-3 sm:pt-2">
+                        <div role="group">
+                            <div class="sm:grid sm:grid-cols-3 sm:items-center sm:gap-4">
+                                <div>
+                                    <div class="text-base font-medium text-gray-900 sm:text-sm sm:text-white"
+                                        id="label-email">Message duration (seconds)</div>
+                                </div>
+                                <div
+                                    class="flex flex-row  w-24 h-6 relative border border-zinc-500 bg-transparent mt-1">
+                                    <button
+                                        class="flex items-center  bg-transparent border-r border-zinc-500 text-white hover:text-zinc-500  h-full w-full rounded-l cursor-pointer "
+                                        @click.prevent="changeAlertDuration(-1)">
+                                        <span class="mb-1 mx-auto text-2xl font-thin">−</span>
+                                    </button>
+                                    <input v-model="alertDuration" type="number"
+                                        class=" focus:outline-none text-center w-8 border-0 bg-transparent font-semibold text-md flex items-center text-white"
+                                        name="custom-input-number" />
+                                    <button
+                                        class="flex items-center bg-transparent text-white hover:text-zinc-500  h-full w-full rounded-r border-l border-zinc-500 cursor-pointer"
+                                        @click.prevent="changeAlertDuration(1)">
+                                        <span class="mb-1 mx-auto text-2xl font-thin">+</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:pt-1">
+                        <label for="region"
+                            class="block text-sm font-medium text-white sm:mt-px sm:pt-2">Position</label>
+                        <div class="mt-1 sm:col-span-2 sm:mt-0">
+                            <select id="country" name="country" autocomplete="country-name"
+                                class="block w-full max-w-lg text-white border-0 border-b border-gray-500 focus:outline-none sm:max-w-xs sm:text-sm bg-transparent">
+                                <option v-for="position in ['Top', 'Bottom', 'Center']" :key="position"
+                                    :value="position" :selected="position === 'Top'" class="bg-gray-500">{{ position }}
+                                </option>
+
+                            </select>
                         </div>
                     </div>
                     <div class="pt-6 sm:pt-5">
