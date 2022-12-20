@@ -83,7 +83,7 @@
                 <!-- Static sidebar for desktop -->
                 <div class="hidden md:flex md:w-64 md:flex-col">
                     <!-- Sidebar component, swap this element with another sidebar if you like -->
-                    <div class="flex min-h-0 flex-1 flex-col bg-gray-800">
+                    <div class="flex min-h-0 flex-1 flex-col bg-zinc-900">
 
                         <div class="flex flex-1 flex-col overflow-hidden">
                             <nav class="flex-1 space-y-1 px-4 py-4">
@@ -94,8 +94,8 @@
                                         aria-hidden="true" /> -->
                                     <a :href="href" :class="[
                                         isActive
-                                            ? 'bg-gray-900 text-white'
-                                            : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                                            ? 'bg-zinc-800 text-white'
+                                            : 'text-gray-300 hover:bg-zinc-900 hover:text-white',
                                         'group flex items-center px-2 py-2 text-sm font-medium rounded-md'
                                     ]" @click="navigate">{{ item.name }}</a>
 

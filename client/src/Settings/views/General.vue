@@ -12,7 +12,25 @@
   }
   ```
 -->
+<script setup>
+import { ref } from 'vue';
+import { Switch } from '@headlessui/vue'
+import ToggleCheck from "@/components/shared/forms/ToggleCheck.vue"
+import ShortToggle from '@/components/shared/forms/ShortToggle.vue';
 
+const enVirtKeyboard = ref(false)
+const showCloseAlert = ref(true)
+const rows = ref(0)
+const cols = ref(0)
+const changeCol = (amount) => {
+    if (amount === -1 && cols.value === 0) return
+    amount === -1 ? cols.value-- : cols.value++
+}
+const changeRow = (amount) => {
+    if (amount === -1 && rows.value === 0) return
+    amount === -1 ? rows.value-- : rows.value++
+}
+</script>
 <template>
     <form class="space-y-8 divide-y divide-gray-500 overflow-auto">
         <div class="space-y-8 divide-y divide-gray-500 sm:space-y-5">
@@ -26,40 +44,12 @@
                     </p>
                 </div>
                 <div class="space-y-3 sm:space-y-2">
-                    <div
-                        class="sm:grid sm:grid-cols-3 text-gray-200 sm:items-start sm:gap-4 sm:border-t sm:border-gray-500 sm:pt-1">
-                        <label for="first-name" class="block text-sm font-medium text-white sm:mt-px sm:pt-2">First
-                            name</label>
-                        <div class="mt-1 sm:col-span-2 sm:mt-0">
-                            <input type="text" name="first-name" id="first-name" autocomplete="given-name"
-                                class="block w-full max-w-lg rounded-sm border-gray-500 shadow-sm bg-transparent sm:max-w-xs sm:text-sm" />
-                        </div>
-                    </div>
-
-                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-500 sm:pt-1">
-                        <label for="last-name" class="block text-sm font-medium text-white sm:mt-px sm:pt-2">Last
-                            name</label>
-                        <div class="mt-1 sm:col-span-2 sm:mt-0">
-                            <input type="text" name="last-name" id="last-name" autocomplete="family-name"
-                                class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm" />
-                        </div>
-                    </div>
-
-                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-500 sm:pt-1">
-                        <label for="email" class="block text-sm font-medium text-white sm:mt-px sm:pt-2">Email
-                            address</label>
-                        <div class="mt-1 sm:col-span-2 sm:mt-0">
-                            <input id="email" name="email" type="email" autocomplete="email"
-                                class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
-                        </div>
-                    </div>
-
-                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-500 sm:pt-1">
-                        <label for="country"
-                            class="block text-sm font-medium text-white sm:mt-px sm:pt-2">Country</label>
+                    <div class="sm:grid sm:grid-cols-3 text-gray-200 sm:items-start sm:gap-4  sm:pt-1">
+                        <label for="first-name"
+                            class="block text-sm font-medium text-white sm:mt-px sm:pt-2">Language</label>
                         <div class="mt-1 sm:col-span-2 sm:mt-0">
                             <select id="country" name="country" autocomplete="country-name"
-                                class="block w-full max-w-lg rounded-md text-white border-gray-500 focus:outline-none sm:max-w-xs sm:text-sm bg-transparent">
+                                class="block w-full max-w-lg text-white border-0 border-b border-gray-500 focus:outline-none sm:max-w-xs sm:text-sm bg-transparent">
                                 <option class="bg-gray-500">English</option>
                                 <option class="bg-gray-500" selected>Kurdish</option>
                                 <option class="bg-gray-500">Arabic</option>
@@ -67,91 +57,148 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-500 sm:pt-1">
-                        <label for="street-address" class="block text-sm font-medium text-white sm:mt-px sm:pt-2">Street
-                            address</label>
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4  sm:pt-1">
+                        <label for="last-name" class="block text-sm font-medium text-white sm:mt-px sm:pt-2">Writing
+                            direction</label>
                         <div class="mt-1 sm:col-span-2 sm:mt-0">
-                            <input type="text" name="street-address" id="street-address" autocomplete="street-address"
-                                class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+                            <select id="country" name="country" autocomplete="country-name"
+                                class="block w-full max-w-lg text-white border-0 border-b border-gray-500 focus:outline-none sm:max-w-xs sm:text-sm bg-transparent">
+                                <option class="bg-gray-500" selected>Ltr</option>
+                                <option class="bg-gray-500">Rtl</option>
+                            </select>
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-500 sm:pt-1">
-                        <label for="city" class="block text-sm font-medium text-white sm:mt-px sm:pt-2">City</label>
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:pt-1">
+                        <label for="email" class="block text-sm font-medium text-white sm:mt-px sm:pt-2">Color
+                            scheme</label>
                         <div class="mt-1 sm:col-span-2 sm:mt-0">
-                            <input type="text" name="city" id="city" autocomplete="address-level2"
-                                class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm" />
+                            <select id="country" name="country" autocomplete="country-name"
+                                class="block w-full max-w-lg text-white border-0 border-b border-gray-500 focus:outline-none sm:max-w-xs sm:text-sm bg-transparent">
+                                <option v-for="color in ['Dark', 'Light', 'Blue', 'Pink', 'System']" :key="color"
+                                    :value="color" class="bg-gray-500">{{ color }}</option>
+
+                            </select>
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-500 sm:pt-1">
-                        <label for="region" class="block text-sm font-medium text-white sm:mt-px sm:pt-2">State /
-                            Province</label>
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:pt-1">
+                        <label for="country"
+                            class="block text-sm font-medium text-white sm:mt-px sm:pt-2">Layout</label>
                         <div class="mt-1 sm:col-span-2 sm:mt-0">
-                            <input type="text" name="region" id="region" autocomplete="address-level1"
-                                class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm" />
+                            <select id="country" name="country" autocomplete="country-name"
+                                class="block w-full max-w-lg border-0 border-b text-white border-gray-500 focus:outline-none sm:max-w-xs sm:text-sm bg-transparent">
+                                <option class="bg-gray-500">Standard</option>
+                                <option class="bg-gray-500" selected>Visual</option>
+                            </select>
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-500 sm:pt-1">
-                        <label for="postal-code" class="block text-sm font-medium text-white sm:mt-px sm:pt-2">ZIP /
-                            Postal code</label>
-                        <div class="mt-1 sm:col-span-2 sm:mt-0">
-                            <input type="text" name="postal-code" id="postal-code" autocomplete="postal-code"
-                                class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm" />
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:pt-1">
+                        <label for="street-address" class="block text-sm font-medium text-white sm:mt-px sm:pt-2">Number
+                            of rows/columns</label>
+                        <div class="mt-1 sm:col-span-2 sm:mt-0 flex justify-start items-center">
+                            <div class="flex flex-row  w-24 h-6 relative border border-zinc-500 bg-transparent mt-1">
+                                <button
+                                    class="flex items-center bg-transparent border-r border-zinc-500 text-white hover:text-zinc-500 h-full w-full rounded-l cursor-pointer "
+                                    @click.prevent="changeRow(-1)">
+                                    <span class="mb-1 mx-auto text-2xl font-thin">−</span>
+                                </button>
+                                <input v-model="rows" type="number"
+                                    class=" focus:outline-none text-center w-8 border-0 bg-transparent font-semibold text-md flex items-center text-white"
+                                    name="custom-input-number" />
+                                <button
+                                    class="flex items-center bg-transparent text-white hover:text-zinc-500  h-full w-full rounded-r border-l border-zinc-500 cursor-pointer"
+                                    @click.prevent="changeRow(1)">
+                                    <span class="mb-1 mx-auto text-2xl font-thin">+</span>
+                                </button>
+                            </div>
+                            <span class="text-white text-2xl mx-2">/</span>
+                            <div class="flex flex-row  w-24 h-6 relative border border-zinc-500 bg-transparent mt-1">
+                                <button
+                                    class="flex items-center  bg-transparent border-r border-zinc-500 text-white hover:text-zinc-500  h-full w-full rounded-l cursor-pointer "
+                                    @click.prevent="changeCol(-1)">
+                                    <span class="mb-1 mx-auto text-2xl font-thin">−</span>
+                                </button>
+                                <input v-model="cols" type="number"
+                                    class=" focus:outline-none text-center w-8 border-0 bg-transparent font-semibold text-md flex items-center text-white"
+                                    name="custom-input-number" />
+                                <button
+                                    class="flex items-center bg-transparent text-white hover:text-zinc-500  h-full w-full rounded-r border-l border-zinc-500 cursor-pointer"
+                                    @click.prevent="changeCol(1)">
+                                    <span class="mb-1 mx-auto text-2xl font-thin">+</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
+
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:pt-1">
+                        <label for="city" class="block text-sm font-medium text-white sm:mt-px sm:pt-2">Enable virtual
+                            keyboard</label>
+                        <div class="mt-1 sm:col-span-2 sm:mt-0">
+                            <div class="flex-shrink-0">
+                                <Switch v-model="enVirtKeyboard"
+                                    :class="[enVirtKeyboard ? 'bg-green-600' : 'bg-gray-500', 'relative inline-flex h-5 w-11 flex-shrink-0 cursor-pointer rounded-sm border-1 border-transparent transition-colors duration-200 ease-in-out ']">
+                                    <span class="sr-only">Agree to policies</span>
+                                    <span aria-hidden="true"
+                                        :class="[enVirtKeyboard ? 'translate-x-5' : 'translate-x-0', 'inline-block h-5 w-5 transform rounded-sm bg-white shadow ring-0 transition duration-200 ease-in-out']" />
+                                </Switch>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:pt-1">
+                        <label for="region" class="block text-sm font-medium text-white sm:mt-px sm:pt-2">Zoom</label>
+                        <div class="mt-1 sm:col-span-2 sm:mt-0">
+                            <select id="country" name="country" autocomplete="country-name"
+                                class="block w-full max-w-lg text-white border-0 border-b border-gray-500 focus:outline-none sm:max-w-xs sm:text-sm bg-transparent">
+                                <option v-for="zoom in [50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150]" :key="zoom"
+                                    :value="zoom" :selected="zoom === 100" class="bg-gray-500">{{ zoom }}</option>
+
+                            </select>
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
 
-            <div class="space-y-6 divide-y divide-gray-500 pt-8 sm:space-y-5 sm:pt-10">
+            <div class="space-y-3 text-white pt-8 sm:space-y-5 sm:pt-10">
                 <div>
-                    <h3 class="text-lg font-medium leading-6 text-gray-900">Notifications</h3>
-                    <p class="mt-1 max-w-2xl text-sm text-gray-500">We'll always let you know about important changes,
-                        but you pick what else you want to hear about.</p>
+                    <h3 class="text-lg font-medium leading-6 ">Messages</h3>
+                    <p class="mt-1 max-w-2xl text-sm text-zink-300">This section is about the alerts for events for
+                        success or failed operations.</p>
                 </div>
-                <div class="space-y-6 divide-y divide-gray-500 sm:space-y-5">
-                    <div class="pt-6 sm:pt-5">
-                        <div role="group" aria-labelledby="label-email">
+                <div class="space-y-2 ">
+                    <div class="pt-5 sm:pt-4">
+                        <div class="sm:grid sm:grid-cols-3 sm:items-baseline sm:gap-4">
+                            <div class="text-base font-medium text-gray-900 sm:text-sm sm:text-white" id="label-email">
+                                Show close button</div>
+                            <div class="mt-4 sm:col-span-2 sm:mt-0">
+                                <div class="max-w-lg space-y-4">
+                                    <div class="relative flex items-start">
+                                        <div class="flex h-5 items-center">
+                                            <ToggleCheck :checked="showCloseAlert"
+                                                @click="showCloseAlert = !showCloseAlert" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pt-3 sm:pt-2">
+                        <div role="group">
                             <div class="sm:grid sm:grid-cols-3 sm:items-baseline sm:gap-4">
                                 <div>
                                     <div class="text-base font-medium text-gray-900 sm:text-sm sm:text-white"
-                                        id="label-email">By Email</div>
+                                        id="label-email">Close on click</div>
                                 </div>
                                 <div class="mt-4 sm:col-span-2 sm:mt-0">
-                                    <div class="max-w-lg space-y-4">
+                                    <div class="max-w-lg space-y-2">
                                         <div class="relative flex items-start">
                                             <div class="flex h-5 items-center">
-                                                <input id="comments" name="comments" type="checkbox"
-                                                    class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
-                                            </div>
-                                            <div class="ml-3 text-sm">
-                                                <label for="comments" class="font-medium text-white">Comments</label>
-                                                <p class="text-gray-500">Get notified when someones posts a comment on a
-                                                    posting.</p>
-                                            </div>
-                                        </div>
-                                        <div class="relative flex items-start">
-                                            <div class="flex h-5 items-center">
-                                                <input id="candidates" name="candidates" type="checkbox"
-                                                    class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
-                                            </div>
-                                            <div class="ml-3 text-sm">
-                                                <label for="candidates"
-                                                    class="font-medium text-white">Candidates</label>
-                                                <p class="text-gray-500">Get notified when a candidate applies for a
-                                                    job.</p>
-                                            </div>
-                                        </div>
-                                        <div class="relative flex items-start">
-                                            <div class="flex h-5 items-center">
-                                                <input id="offers" name="offers" type="checkbox"
-                                                    class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
-                                            </div>
-                                            <div class="ml-3 text-sm">
-                                                <label for="offers" class="font-medium text-white">Offers</label>
-                                                <p class="text-gray-500">Get notified when a candidate accepts or
-                                                    rejects an offer.</p>
+                                                <ShortToggle :enabled="closeAlert"
+                                                    @click="showCloseAlert = !showCloseAlert" />
                                             </div>
                                         </div>
                                     </div>

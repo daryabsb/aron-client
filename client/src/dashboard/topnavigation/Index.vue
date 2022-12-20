@@ -26,7 +26,7 @@ const toggleSettingsSidebar = inject("toggleSettingsSidebar")
 </script>
 
 <template>
-  <header class="relative z-10 py-2 items-center">
+  <header class="relative z-10 py-2 items-center bg-zinc-900">
     <div class="relative z-10 mx-auto flex h-full flex-col justify-center px-3 text-white">
       <div class="relative flex w-full items-center pl-1 sm:ml-0 sm:pr-2">
         <div class="group relative flex h-full w-12 items-center lg:hidden">
@@ -40,7 +40,7 @@ const toggleSettingsSidebar = inject("toggleSettingsSidebar")
 
         </div>
         <!-- <div class="container relative left-0 flex h-full w-5/6"> -->
-        <div class="w-full h-full bg-gray-900 flex justify-start items-center">
+        <div class="w-full h-full  flex justify-start items-center">
           <span @click="goBackToStore" class="pb-2 p-4 text-white">
             <ArrowLeftIcon class="h-8 w-8" />
           </span>
