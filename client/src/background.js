@@ -1,13 +1,12 @@
 "use strict";
 
-import { app, protocol, BrowserWindow, Menu } from "electron";
+import { app, protocol, BrowserWindow, Menu, screen } from "electron";
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 import installExtension, { VUEJS3_DEVTOOLS } from "electron-devtools-installer";
 import windowStateKeeper from "electron-window-state";
 const isDevelopment = process.env.NODE_ENV !== "production";
 
 require("@electron/remote/main").initialize();
-
 let contextMenu = Menu.buildFromTemplate([
   { label: "Item 1" },
   { label: "Item 2" },
@@ -102,6 +101,14 @@ app.on("ready", async () => {
     } catch (e) {
       console.error("Vue Devtools failed to install:", e.toString());
     }
+  }
+  // let factor = screen.getPrimaryDisplay().scaleFactor;
+  try {
+    // win.width = win.width / factor;
+    // win.height = win.height / factor;
+    // win.webPreferences.zoom = 1.0 / factor;
+  } catch (error) {
+    console.log("SCREEN", error);
   }
   createWindow();
 });
