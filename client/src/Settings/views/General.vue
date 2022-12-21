@@ -14,7 +14,6 @@
 -->
 <script setup>
 import { ref } from 'vue';
-import { Switch } from '@headlessui/vue'
 import ToggleCheck from "@/components/shared/forms/ToggleCheck.vue"
 import ShortToggle from '@/components/shared/forms/ShortToggle.vue';
 import FormItem from '@/components/shared/forms/FormItem.vue';
@@ -74,7 +73,7 @@ const buttonBars = [
     },
     {
         name: "Cash drawer",
-        enabled: true,
+        enabled: false,
         isVisual: false,
     },
 ]
@@ -104,10 +103,9 @@ const changeRow = (amount) => {
 <template>
     <form class="space-y-4 divide-y divide-gray-500 overflow-auto">
         <div class="space-y-4  sm:space-y-2">
-
-            <div class="space-y-4">
+            <div class="space-y-2">
                 <div>
-                    <h1 class="text-2xl font-poppins leading-5 text-white">Application settings</h1>
+                    <h1 class="text-2xl font-light text-zinc-300">Application styles</h1>
                 </div>
                 <div class="space-y-2">
                     <FormItem>
@@ -147,10 +145,9 @@ const changeRow = (amount) => {
                     </FormItem>
                 </div>
             </div>
-
-            <div class="space-y-4 text-white pt-3 sm:space-y-2 sm:pt-2">
+            <div class="space-y-2 text-white pt-2 sm:space-y-1 sm:pt-2">
                 <div>
-                    <h1 class="text-2xl font-light leading-5 text-white">Messages</h1>
+                    <h1 class="text-2xl  font-light text-zinc-300">Messages</h1>
                 </div>
                 <div class="space-y-2 ">
                     <FormItem>
@@ -183,12 +180,10 @@ const changeRow = (amount) => {
                     </FormItem>
                 </div>
             </div>
-            <div class="space-y-4 text-white pt-3 sm:space-y-2 sm:pt-2">
+            <div class="space-y-4 text-white pt-1 sm:space-y-1 sm:pt-2">
                 <div>
-                    <h1 class="text-2xl font-normal font-poppins leading-6 text-white">Business day</h1>
+                    <h1 class="text-2xl  font-light text-zinc-300">Business day</h1>
                 </div>
-
-
                 <div class="space-y-2 ">
                     <FormItem>
                         <FormLabel>Show cash in on application start</FormLabel>
@@ -205,10 +200,10 @@ const changeRow = (amount) => {
                     </FormItem>
                 </div>
             </div>
-            <div class="space-y-4 text-white pt-3 sm:space-y-2 sm:pt-2">
+            <div class="space-y-4 text-white pt-1 sm:space-y-1">
                 <div>
-                    <h1 class="text-2xl font-normal font-poppins leading-6 text-white">Button bar</h1>
-                    <p class="my-3  text-sm ">Select action to appear on button bar.</p>
+                    <h1 class="text-2xl font-light text-zinc-300">Button bar</h1>
+                    <p class="my-1  text-sm ">Select action to appear on button bar.</p>
                 </div>
                 <FormItem>
                     <div class="col-span-4">
@@ -230,13 +225,5 @@ const changeRow = (amount) => {
             </div>
         </div>
 
-        <div class="pt-5">
-            <div class="flex justify-end">
-                <button type="button"
-                    class="rounded-md border border-zinc-500 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Cancel</button>
-                <button type="submit"
-                    class="ml-3 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Save</button>
-            </div>
-        </div>
     </form>
 </template>

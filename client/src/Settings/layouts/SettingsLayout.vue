@@ -79,13 +79,13 @@
 
 
             </div> -->
-            <div class="flex flex-nowrap  h-full">
+            <div class="flex h-full">
                 <!-- Static sidebar for desktop -->
-                <div class="hidden md:flex md:w-64 md:flex-col">
+                <div class="hidden md:flex md:w-64 md:flex-col overflow-hidden">
                     <!-- Sidebar component, swap this element with another sidebar if you like -->
-                    <div class="flex min-h-0 flex-1 flex-col bg-zinc-900">
+                    <div class="flex min-h-0 flex-1 flex-col bg-zinc-900 ">
 
-                        <div class="flex flex-1 flex-col overflow-hidden">
+                        <div class="flex flex-1 flex-col">
                             <nav class="flex-1 space-y-1 px-4 py-4">
                                 <router-link v-for="item in navigation" :key="item.name" :to="item.to"
                                     v-slot="{ isActive, href, navigate }">
@@ -104,21 +104,26 @@
                         </div>
                     </div>
                 </div>
-                <main class="flex w-full inset-0 overflow-auto scrollbar">
 
-                    <div class="h-full w-full p-4">
+                <main class="h-full flex w-full overflow-auto scrollbar">
+
+                    <div class=" w-full p-4">
                         <div class=" h-full w-full ">
                             <router-view></router-view>
                         </div>
                     </div>
                 </main>
+
+
+
             </div>
-            <div class="flex justify-end items-center px-12 border-t border-gray-500 bg-pink-600 ">
-                <button class="bg-green-500 text-white hover:bg-green-300 w-24 mt-3 mx-2 py-2 capitalize"
+            <div class=" flex justify-end items-center py-2  px-12 border-t border-gray-500 inset-y-0 space-x-8">
+                <button class="bg-green-500 text-white hover:bg-green-300 h-10 w-24 capitalize"
                     @click="submitSettings">save</button>
-                <button class="bg-red-500 text-white hover:bg-red-300 w-24 mt-3 py-2 capitalize"
+                <button class="bg-red-500 text-white hover:bg-red-300 h-10 w-24 capitalize"
                     @click="$router.push('/store')">cancel</button>
             </div>
+
         </div>
     </div>
 </template>
