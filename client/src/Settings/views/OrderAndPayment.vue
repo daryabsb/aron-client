@@ -146,7 +146,7 @@ const changeDueDate = (amount) => {
             </div>
             <div class="space-y-4">
                 <div>
-                    <h1 class="text-2xl font-light text-zinc-300">Payment</h1>
+                    <h1 class="text-2xl font-thin text-zinc-300">Payment</h1>
                 </div>
                 <div class="space-y-2">
                     <FormItem>
