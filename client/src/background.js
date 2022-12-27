@@ -1,6 +1,6 @@
 "use strict";
 
-import { app, protocol, BrowserWindow, Menu, screen } from "electron";
+const { app, protocol, BrowserWindow, Menu, screen } = require("electron");
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 import installExtension, { VUEJS3_DEVTOOLS } from "electron-devtools-installer";
 import windowStateKeeper from "electron-window-state";
